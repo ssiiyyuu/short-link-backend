@@ -1,0 +1,31 @@
+server:
+  port: 8826
+
+spring:
+  application:
+    name: short-link-server
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    include: common, rabbitMQ, redis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${short-link.db.username}
+    password: ${short-link.db.password}
+    url: jdbc:mysql://${short-link.db.host}:${short-link.db.port}/${short-link.db.database}?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&nullCatalogMeansCurrent=true
+
+short-link:
+  host: localhost
+  domain: http://${short-link.host}:${server.port}
+  black-list:
+    enable: true
+    domains: jxust.edu.cn, blog.csdn.net
+  db:
+    username: siyu
+    password: 123456
+    host: ${short-link.host}
+    port: 3306
+    database: short-link
+
+
